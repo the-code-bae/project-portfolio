@@ -6,8 +6,10 @@ library(jsonlite)
 library(sp)
 library(httr)
 
+# https://www.doogal.co.uk/london_stations.php -- london stations file downloaded from here
 london_stations <- read.csv("~/Documents/gh-repos/project-portfolio/mapping/london_stations.csv"
                      , stringsAsFactors = F)
+
 
 names(london_stations) <- names(london_stations) %>%
   gsub("[.]", "", .) %>%
