@@ -2,7 +2,7 @@
 
 # ---- Load packages and functions ----
 
-source("~/Documents/gh-repos/project-portfolio/mapping/hmo_geospatial_analysis_functions.r")
+source("~/Documents/gh-repos/project-portfolio/hmo_cleansing/mapping/hmo_geospatial_analysis_functions.r")
 
 library(pdftools)
 #Download hmo register from weblink

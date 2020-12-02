@@ -1,7 +1,7 @@
 library(tidyverse)
 
 # Load file with geospatial mapping functions
-source("~/Documents/gh-repos/project-portfolio/mapping/hmo_geospatial_analysis_functions.r")
+source("~/Documents/gh-repos/project-portfolio/hmo_cleansing/mapping/hmo_geospatial_analysis_functions.r")
 
 file_csv <- "~/Documents/gh-repos/project-portfolio/waltham_forest_registers/20201126_hmo_reg.csv"
 

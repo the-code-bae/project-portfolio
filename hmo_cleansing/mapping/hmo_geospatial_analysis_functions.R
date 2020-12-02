@@ -7,7 +7,7 @@ library(sp)
 library(httr)
 
 # https://www.doogal.co.uk/london_stations.php -- london stations file downloaded from here
-london_stations <- read.csv("~/Documents/gh-repos/project-portfolio/mapping/london_stations.csv"
+london_stations <- read.csv("~/Documents/gh-repos/project-portfolio/hmo_cleansing/mapping/london_stations.csv"
                      , stringsAsFactors = F)
 
 
