@@ -5,7 +5,9 @@ weight = input("enter your weight in kg: ")
 
 #Write your code below this line 
 
-height_squared = int(height) ** 2
-bmi = int(weight)/height_squared
+height_squared = float(height) ** 2
+bmi = weight/height_squared
 
+# print(height_squared)
+# print(bmi)
 print(int(bmi))
