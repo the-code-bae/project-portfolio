@@ -5,9 +5,9 @@ two_digit_number = input("Type a two digit number: ")
 ####################################
 #Write your code below this line 
 
-to_int_num_input = int(two_digit_number)
+num = str(two_digit_number)
 
-print(to_int_num_input[0]+to_int_num_input[1])
+print(int(num[0])+int(num[1]))
 
 
 
