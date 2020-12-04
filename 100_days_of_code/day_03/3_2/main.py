@@ -6,7 +6,7 @@ weight = float(input("enter your weight in kg: "))
 #Write your code below this line 
 
 height_squared = height ** 2
-bmi = round(weight/height_squared, 0)
+bmi = round(weight/height_squared)
 # msg = f"Your BMI is {bmi}, you {weight_status}"
 
 if bmi < 18.5:
