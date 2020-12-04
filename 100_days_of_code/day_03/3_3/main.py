@@ -4,12 +4,15 @@ year = int(input("Which year do you want to check? "))
 
 #Write your code below this line 👇
 
-if year % 4 == 0 & year % 100 == 0:
- 	print(f"The year {year} is a leap year")
+if year % 4 != 0:
+	print("Not a leap year")
+elif year % 100 != 0:
+	print("Leap year")
 elif year % 400 == 0:
-	print(f"The year {year} is a leap year")
-elif year % 4 == 0:
-	print(f"The year {year} is a leap year")
+	print("Leap year")
 else:
-	print(f"The year {year} is not a leap year")
+	print("Not a leap year")
+
+
+
 
