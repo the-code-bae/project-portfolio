@@ -1,3 +1,5 @@
+import random 
+
 rock = '''
     _______
 ---'   ____)
@@ -25,3 +27,34 @@ scissors = '''
 ---.__(___)
 '''
 
+# Create list of options to print
+options = [rock, paper, scissors]
+
+# Store player's choice
+p_choice = input("What do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors\n")
+player_choice = int(p_choice)
+
+# Create random computer choice 
+computer_choice = random.randint(0,2)
+
+# Print what the player chose
+if player_choice == 0:
+  print(options[player_choice])
+elif player_choice == 1:
+  print(options[player_choice])
+elif player_choice == 2:
+  print(options[player_choice])
+else:
+  "Try again, your entry is not valid."
+
+# Print what the computer chose
+if computer_choice == 0:
+  print(f"Computer chose: \n{options[computer_choice]}")
+elif computer_choice == 1:
+  print(f"Computer chose: \n{options[computer_choice]}")
+elif computer_choice == 2:
+  print(f"Computer chose: \n{options[computer_choice]}")
+else:
+  "Something went wrong here."
+
+# So who won?
