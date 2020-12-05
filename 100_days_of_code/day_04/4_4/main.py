@@ -37,36 +37,24 @@ player_choice = int(p_choice)
 # Create random computer choice 
 computer_choice = random.randint(0,2)
 
-# Print what the player chose
-if player_choice == 0:
-  print(options[player_choice])
-elif player_choice == 1:
-  print(options[player_choice])
-elif player_choice == 2:
-  print(options[player_choice])
-else:
-  print("Try again, your entry is not valid.")
+accepted_entries = [0,1,2]
 
-# Print what the computer chose
-if computer_choice == 0:
-  print(f"Computer chose: \n{options[computer_choice]}")
-elif computer_choice == 1:
-  print(f"Computer chose: \n{options[computer_choice]}")
-elif computer_choice == 2:
-  print(f"Computer chose: \n{options[computer_choice]}")
-else:
-  print("Something went wrong here.")
+if player_choice in accepted_entries:
+  # Print what the player chose
+  print(options[player_choice])
 
-# So who won?
-if player_choice == computer_choice:
-  print("It's a draw")
-elif (player_choice == 0 and computer_choice == 2) or (player_choice == 2 and computer_choice == 1) or (player_choice == 1 and computer_choice == 0):
-  print("You win!")
-elif (computer_choice == 0 and player_choice == 2) or (computer_choice == 2 and player_choice == 1) or (computer_choice == 1 and player_choice == 0):
-  print("You lose :(")
+  # Print what the computer chose
+  print(f"Computer chose: \n{options[computer_choice]}")
+  if player_choice == computer_choice:
+    print("It's a draw")
+  elif (player_choice == 0 and computer_choice == 2) or (player_choice == 2 and computer_choice == 1) or (player_choice == 1 and computer_choice == 0):
+    print("You win!")
+  elif (computer_choice == 0 and player_choice == 2) or (computer_choice == 2 and player_choice == 1) or (computer_choice == 1 and player_choice == 0):
+    print("You lose :(")
+  else:
+    print("Something has gone drastically wrong.")
 else:
-  print("Something has gone drastically wrong.")
-
+  print("You typed an invalid number, you lose!")
 
 
 
