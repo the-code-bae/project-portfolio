@@ -58,3 +58,16 @@ else:
   "Something went wrong here."
 
 # So who won?
+if player_choice == computer_choice:
+  print("It's a draw")
+elif (player_choice == 0 and computer_choice == 2) or (player_choice == 2 and computer_choice == 1) or (player_choice == 1 and computer_choice == 0):
+  print("You win!")
+elif (computer_choice == 0 and player_choice == 2) or (computer_choice == 2 and player_choice == 1) or (computer_choice == 1 and player_choice == 0):
+  print("You lose :(")
+else:
+  "Something has gone drastically wrong."
+
+
+
+
+
