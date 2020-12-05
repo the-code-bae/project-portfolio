@@ -7,7 +7,7 @@ names = names_string.split(", ")
 
 #Write your code below this line 👇
 
-pick_name = random.randint(0, len(names))
+pick_name = random.randint(0, len(names)-1)
 
 payer = names[pick_name]
 
