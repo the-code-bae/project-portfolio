@@ -45,7 +45,7 @@ elif player_choice == 1:
 elif player_choice == 2:
   print(options[player_choice])
 else:
-  "Try again, your entry is not valid."
+  print("Try again, your entry is not valid.")
 
 # Print what the computer chose
 if computer_choice == 0:
@@ -55,7 +55,7 @@ elif computer_choice == 1:
 elif computer_choice == 2:
   print(f"Computer chose: \n{options[computer_choice]}")
 else:
-  "Something went wrong here."
+  print("Something went wrong here.")
 
 # So who won?
 if player_choice == computer_choice:
@@ -65,7 +65,7 @@ elif (player_choice == 0 and computer_choice == 2) or (player_choice == 2 and co
 elif (computer_choice == 0 and player_choice == 2) or (computer_choice == 2 and player_choice == 1) or (computer_choice == 1 and player_choice == 0):
   print("You lose :(")
 else:
-  "Something has gone drastically wrong."
+  print("Something has gone drastically wrong.")
 
 
 
