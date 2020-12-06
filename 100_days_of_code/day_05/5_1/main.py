@@ -7,6 +7,17 @@ for n in range(0, len(student_heights)):
 
 #Write your code below this row 👇
 
+sum_heights = 0
+num_heights = 0
+
+for height in student_heights:
+	sum_heights += height
+	num_heights += 1
+
+avg_height = round(sum_heights/num_heights)
+
+print(avg_height)
+
 
 
 
