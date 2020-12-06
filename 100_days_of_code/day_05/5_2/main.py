@@ -7,6 +7,12 @@ print(student_scores)
 
 #Write your code below this row 👇
 
+highest = 0
 
+# for i in range(0, len(student_scores)):
+for num in student_scores:
+  if num > highest:
+    highest = num
 
+print(f"The highest score in the class is: {highest}")
 
