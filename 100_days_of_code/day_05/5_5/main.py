@@ -46,5 +46,15 @@ final_output = letter_section + symbol_section + number_section
 
 print(final_output)
 
+
 #Hard Level - Order of characters randomised:
 #e.g. 4 letter, 2 symbol, 2 number = g^2jk8&P
+
+randomise_final = random.sample(range(0, len(final_output)),len(final_output))
+
+hard_final_output = ''
+
+for num in randomise_final:
+	hard_final_output += final_output[num]
+
+print(hard_final_output)
