@@ -15,3 +15,11 @@ def jump():
     
 while at_goal() == False:
     jump()
+
+# Can also be written as:
+
+# while at_goal() != True:
+#     jump()
+
+# while not at_goal():
+#     jump()    
