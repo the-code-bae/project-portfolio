@@ -20,11 +20,31 @@ random_numbers = random.sample(range(0,nr_numbers),nr_numbers)
 print(random_letters)
 print(len(random_letters))
 
-print(random_symbols)
-print(len(random_symbols))
+# print(random_symbols)
+# print(len(random_symbols))
 
-print(random_numbers)
-print(len(random_numbers))
+# print(random_numbers)
+# print(len(random_numbers))
+
+letter_section = ''
+
+for num in random_letters:
+	letter_section += letters[num]
+
+symbol_section = ''
+
+for num in random_symbols:
+	symbol_section += symbols[num]
+
+number_section = ''
+
+for num in random_numbers:
+	number_section += numbers[num]	
+
+
+final_output = letter_section + symbol_section + number_section
+
+print(final_output)
 
 #Hard Level - Order of characters randomised:
 #e.g. 4 letter, 2 symbol, 2 number = g^2jk8&P
