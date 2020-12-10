@@ -17,7 +17,8 @@ travel_log = [
 
 def add_new_country(country, visits, cities):
 	travel_log.append({"country": country, "visits": visits, "cities": cities})
-
+	cities_visted = ", ".join(cities)
+	print(f"You've visited {country} {visits} times. \n You've been to {cities_visted}.")
 
 
 #🚨 Do not change the code below
