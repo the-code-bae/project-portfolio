@@ -22,4 +22,16 @@ while end_bidding == False:
 		clear()
 
 
-print(sealed_bids)
+# print(sealed_bids)
+# print(max(sealed_bids.values()))
+
+highest_bid = max(sealed_bids.values())
+
+for key in sealed_bids:
+	if sealed_bids[key] == highest_bid:
+		highest_bidder = key
+# highest_bidder = 
+
+# print(highest_bidder + ":" + highest_bid)
+
+# print("The winner of the bid is James with a bid of $142.")
