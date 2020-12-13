@@ -10,7 +10,7 @@ end_bidding = False
 while end_bidding == False:
 
 	name = input("What is your name?\n")
-	bid  = input("What is your bid?: \n$")
+	bid  = int(input("What is your bid?: \n$"))
 
 	sealed_bids[name] = bid
 
@@ -21,17 +21,13 @@ while end_bidding == False:
 	else:
 		clear()
 
-
-# print(sealed_bids)
-# print(max(sealed_bids.values()))
-
+# Find highest bid
 highest_bid = max(sealed_bids.values())
 
+# Find highest bidder based on their bid
 for key in sealed_bids:
 	if sealed_bids[key] == highest_bid:
 		highest_bidder = key
-# highest_bidder = 
 
-# print(highest_bidder + ":" + highest_bid)
-
-# print("The winner of the bid is James with a bid of $142.")
+# Print winner
+print(f"The winner of the bid is {highest_bidder} with a bid of ${highest_bid}.")
