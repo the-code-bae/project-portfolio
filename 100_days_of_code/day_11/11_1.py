@@ -31,14 +31,28 @@
 #Hint 3: Download and read this flow chart I've created: 
 #   https://drive.google.com/uc?export=download&id=1rDkiHCrhaf9eX7u7yjM1qwSuyEk-rPnt
 
+import random 
+
+start_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n':\n")
+print(start_game)
 #Hint 4: Create a deal_card() function that uses the List below to *return* a random card.
 #11 is the Ace.
-#cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def deal_card():
+    output = random.choice(cards)
+    return output
 
 #Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
-#user_cards = []
-#computer_cards = []
+user_cards = []
+computer_cards = []
 
+for i in range(2):
+	user_cards.append(deal_card())
+	computer_cards.append(deal_card())
+
+print(user_cards)
+print(computer_cards)
 #Hint 6: Create a function called calculate_score() that takes a List of cards as input 
 #and returns the score. 
 #Look up the sum() function to help you do this.
