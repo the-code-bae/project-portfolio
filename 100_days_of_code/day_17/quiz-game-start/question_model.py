@@ -4,6 +4,6 @@ class Question:
         self.answer = q_answer
 
 
-question_1 = Question("2+3+5", "True")
-print(question_1.text)
-print(question_1.answer)
+# question_1 = Question("2+3+5", "True")
+# print(question_1.text)
+# print(question_1.answer)
