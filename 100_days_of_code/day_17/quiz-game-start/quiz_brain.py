@@ -7,6 +7,4 @@ class QuizBrain:
         q_num = self.question_number
         q_list = self.question_list
         current_question = q_list[q_num]
-        user_answer: str = input(f"Q.1: {current_question.text} (True/False)?")
-        return user_answer
-
+        input(f"Q.1: {current_question.text} (True/False)?: ")
