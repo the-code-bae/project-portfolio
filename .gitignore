@@ -3,3 +3,6 @@
 *venv/
 *.idea/
 *__pycache__/
+
+# Hide token for todoist api
+*api_token.py
