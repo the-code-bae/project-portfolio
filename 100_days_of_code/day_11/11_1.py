@@ -60,6 +60,22 @@ def calculate_score(cards):
 
 	return sum(cards)
 
+def compare(user_score, computer_score):
+	if user_score == computer_score:
+		return "Draw"
+	elif computer_score == 0:
+		return "Lose, opponent has blackjack"
+	elif user_score == 0:
+		return "Win with a blackjack"
+	elif user_score > 21:
+		return "You went over. You lose"
+	elif computer_score > 21:
+		return "Opponent went over. You win"
+	elif user_score > computer_score:
+		return "You win"
+	else:
+		return "You lose"
+
 #Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
 user_cards = []
 computer_cards = []
@@ -87,15 +103,17 @@ while not is_game_over:
 		else:
 			is_game_over = True
 
-
-
-
-
 #Hint 11: The score will need to be rechecked with every new card drawn and the checks in Hint 9 need to be repeated until the game ends.
 
 #Hint 12: Once the user is done, it's time to let the computer play. The computer should keep drawing cards as long as it has a score less than 17.
+while computer_score != 0 and computer_score < 17:
+	computer_cards.append(deal_card())
+	computer_score = calculate_score(computer_cards)
+
 
 #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
+
+
 
 #Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
 
