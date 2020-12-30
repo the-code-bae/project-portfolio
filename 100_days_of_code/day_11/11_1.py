@@ -62,19 +62,19 @@ def calculate_score(cards):
 
 def compare(user_score, computer_score):
 	if user_score == computer_score:
-		return "Draw"
+		return print("Draw")
 	elif computer_score == 0:
-		return "Lose, opponent has blackjack"
+		return print("Lose, opponent has blackjack")
 	elif user_score == 0:
-		return "Win with a blackjack"
+		return print("Win with a blackjack")
 	elif user_score > 21:
-		return "You went over. You lose"
+		return print("You went over. You lose")
 	elif computer_score > 21:
-		return "Opponent went over. You win"
+		return print("Opponent went over. You win")
 	elif user_score > computer_score:
-		return "You win"
+		return print("You win")
 	else:
-		return "You lose"
+		return print("You lose")
 
 #Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
 user_cards = []
@@ -90,7 +90,7 @@ while not is_game_over:
 	user_score = calculate_score(user_cards)
 	computer_score = calculate_score(computer_cards)
 	print(f"your cards: {user_cards}, current score : {user_score}")
-	print(f"computer cards: {computer_cards}, current score : {computer_score}")
+	print(f"Computer's first card: {computer_cards[0]}")
 
 
 	if user_score == 0 or computer_score == 0 or user_score > 21:
@@ -110,7 +110,7 @@ while computer_score != 0 and computer_score < 17:
 	computer_cards.append(deal_card())
 	computer_score = calculate_score(computer_cards)
 
-
+compare(user_score, computer_score)
 #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
 
 
