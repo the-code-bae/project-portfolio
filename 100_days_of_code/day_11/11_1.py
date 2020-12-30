@@ -43,14 +43,6 @@ def deal_card():
     output = random.choice(cards)
     return output
 
-#Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
-user_cards = []
-computer_cards = []
-
-for i in range(2):
-	user_cards.append(deal_card())
-	computer_cards.append(deal_card())
-
 #Hint 6: Create a function called calculate_score() that takes a List of cards as input 
 #and returns the score. 
 #Look up the sum() function to help you do this.
@@ -68,9 +60,15 @@ def calculate_score(cards):
 
 	return sum(cards)
 
+#Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
+user_cards = []
+computer_cards = []
 
+for i in range(2):
+	user_cards.append(deal_card())
+	computer_cards.append(deal_card())
 
-
+calculate_score(user_cards)
 
 #Hint 9: Call calculate_score(). If the computer or the user has a blackjack (0) or if the user's score is over 21, then the game ends.
 
