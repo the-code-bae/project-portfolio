@@ -89,7 +89,7 @@ while not is_game_over:
 	#Hint 9: Call calculate_score(). If the computer or the user has a blackjack (0) or if the user's score is over 21, then the game ends.
 	user_score = calculate_score(user_cards)
 	computer_score = calculate_score(computer_cards)
-	print(f"your cards: {user_cards}, current score : {user_score}")
+	print(f"Your cards: {user_cards}, current score : {user_score}")
 	print(f"Computer's first card: {computer_cards[0]}")
 
 
@@ -111,6 +111,9 @@ while computer_score != 0 and computer_score < 17:
 	computer_score = calculate_score(computer_cards)
 
 compare(user_score, computer_score)
+print(f"Your final hand: {user_cards}, final score: {user_score}")
+print(f"Computer's final hand: {computer_cards}, final score: {computer_score}")
+
 #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
 
 
