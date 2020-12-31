@@ -21,9 +21,8 @@ def set_difficulty():
 	else:
 		return HARD_LEVEL_TURNS
 
-
+turns = set_difficulty()
 guess = int(input("Make a guess: "))
-turns = set_difficulty
 
 print(f"You have {turns} attempts remaining to guess the number.")
 
