@@ -23,8 +23,6 @@ def set_difficulty():
 		return HARD_LEVEL_TURNS
 
 turns = set_difficulty()
-
-
 guess = int(input("Make a guess: "))
 check_answer(guess, answer)
 
