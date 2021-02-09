@@ -33,7 +33,7 @@ for x in london_stations_df[['Station', 'Latitude', 'Longitude']].values:
     LONDON_STATIONS.append((x[0],(x[1],x[2])))
 
 
-# In[13]:
+# In[17]:
 
 
 # TODO refactor - use less code
@@ -51,6 +51,17 @@ class NearestStation:
         postcode = postcode
         regex_str = r'[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][A-Z]{2}'
         return re.findall(regex_str, postcode, flags=re.IGNORECASE)[0]
+    
+    @staticmethod
+    def nearest_station(lat_lon, unit='m', n=1, stations=LONDON_STATIONS):
+        if unit == 'm':
+            distances = [(x[0], round(distance.distance(lat_lon, x[1]).miles,1)) for x in stations]
+            distances.sort(key=lambda x:x[1])
+            return distances[:n]
+        elif unit == 'km':
+            distances = [(x[0], round(distance.distance(lat_lon, x[1]).km,1)) for x in stations]
+            distances.sort(key=lambda x:x[1])
+            return distances[:n]
     
     @property
     def unit(self):
@@ -95,3 +106,68 @@ class NearestStation:
     
     def find_stations_with_x_radius(self, n):
         return [x for x in self.distances if x[1] <= n]
+
+
+# In[19]:
+
+
+NearestStation.nearest_station(('51.558033', '-0.162331'), n=5)
+
+
+# In[14]:
+
+
+NearestStation.extract_postcode('48 antil road n17 3ss')
+
+
+# In[6]:
+
+
+x = NearestStation('N4 4AF')
+
+
+# In[7]:
+
+
+x.find_nearest_station()
+
+
+# In[8]:
+
+
+x.find_nearest_n_stations(5)
+
+
+# In[9]:
+
+
+x.unit
+
+
+# In[10]:
+
+
+x.find_stations_with_x_radius(1)
+
+
+# In[11]:
+
+
+test_postcodes = ['N15 3AD', 'N4 4AF', 'N10 3QS', 'N15 4AR', 'N15 4JF']
+
+
+# In[12]:
+
+
+for postcode in test_postcodes:
+    obj = NearestStation(postcode)
+    print(obj.postcode)
+    print(obj.find_stations_with_x_radius(1))
+    print('------------------')
+
+
+# In[ ]:
+
+
+
+
