@@ -118,14 +118,14 @@ df = pd.concat(results, ignore_index=True)
 
 
 # created a named tuple object
-Station = namedtuple('Station', ['name', 'latitude', 'longitude'])
+Station = namedtuple('Station', ['name', 'lat_lon'])
 
 
 # In[13]:
 
 
 # TODO create array for use in the finding nearest stations script
-LONDON_STATIONS = [Station(s[0], s[1], s[2]) for s in df[['commonName', 'lat', 'lon']].values]
+LONDON_STATIONS = [Station(s[0], (s[1], s[2])) for s in df[['commonName', 'lat', 'lon']].values]
 
 
 # In[14]:
