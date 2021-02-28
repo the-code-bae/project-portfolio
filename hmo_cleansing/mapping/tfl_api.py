@@ -118,7 +118,7 @@ df = pd.concat(results, ignore_index=True)
 
 
 # created a named tuple object
-# Station = namedtuple('Station', ['name', 'latitude', 'longitude'])
+Station = namedtuple('Station', ['name', 'latitude', 'longitude'])
 
 
 # In[13]:
