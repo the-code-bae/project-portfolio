@@ -65,7 +65,24 @@ final_df = final_df[final_df['property_address'] != '']
 print('final df length: ' + str(len(final_df)))
 final_df['postcode'] = final_df['property_address'].map(mpa.NearestStation.extract_postcode)
 
-# final_df['nearest_station'] = final_df['property_address'].map(mpa.NearestStation.extract_postcode)
-# print(final_df['postcode'][:5].map(mpa.NearestStation.find_nearest_station))
-# final_df.to_csv(p.joinpath(today_date + "waltham_forest_prpl_register.csv"), index=False)
 
+def nearest_station_wrapper(pc, n):
+    try:
+        return mpa.NearestStation(pc).find_nearest_station()[n]
+    except KeyError:
+        return None
+
+
+final_df['nearest_station'] = final_df['postcode'].map(lambda x: nearest_station_wrapper(x, 0))
+final_df['nearest_station_dist_miles'] = final_df['postcode'].map(lambda x: nearest_station_wrapper(x, 1))
+
+# Write code to determine who has the most properties to their name
+# print(final_df.groupby(['licence_holder'])['property_address'].count().head())
+
+# Write code to determine station with the most properties nearby
+
+# print(final_df.groupby(['nearest_station'])['property_address'].count().head())
+
+# Save to csv
+
+final_df.to_csv(p.joinpath(today_date + " waltham_forest_prpl_register.csv"), index=False)
