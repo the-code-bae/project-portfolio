@@ -10,6 +10,7 @@ import logging
 
 load_dotenv()
 logger = logging.getLogger('__name__')
+#TODO Change colour of logging message from red to white
 logging.basicConfig(format='[%(asctime)s.%(msecs)03d] %(filename)s - [%(levelname)s] %(message)s'
                     , datefmt='%d-%b-%y %H:%M:%S'
                     , level=logging.INFO)
