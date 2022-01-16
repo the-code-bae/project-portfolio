@@ -61,4 +61,4 @@ while is_empty == 0:
 for line in completed_tasks_data:
     print(line)
 
-print(offset, " : ", str(len(completed_tasks_data)))
+# TODO Unpack items in lists
