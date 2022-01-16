@@ -2,11 +2,12 @@ import prefect
 from prefect import task, Flow
 
 @task
-def hello_task():
+def say_hello():
     logger = prefect.context.get("logger")
-    logger.info("Hello world!")
+    logger.info("Hello, Cloud!")
 
 with Flow("hello-flow") as flow:
-    hello_task()
+    say_hello()
 
-flow.run()
+# Register the flow under the "tutorial" project
+flow.register(project_name="tutorial")
