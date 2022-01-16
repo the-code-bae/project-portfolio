@@ -1,16 +1,24 @@
+import os
+
 import prefect
 from prefect import task, Flow, Parameter
+from prefect.run_configs import LocalRun
+
 
 @task
 def say_hello(name):
+    # Load the greeting to use from an environment variable
+    greeting = os.environ.get("GREETING")
     logger = prefect.context.get("logger")
-    logger.info(f"Hello, {name}!")
+    logger.info(f"{greeting}, {name}!")
+
 
 with Flow("hello-flow") as flow:
-    # An optional parameter "people", with a default list of names
     people = Parameter("people", default=["Arthur", "Ford", "Marvin"])
-    # Map `say_hello` across the list of names
     say_hello.map(people)
+
+# Configure the `GREETING` environment variable for this flow
+flow.run_config = LocalRun(env={"GREETING": "Hello"})
 
 # Register the flow under the "tutorial" project
 flow.register(project_name="tutorial")
