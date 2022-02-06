@@ -1,10 +1,12 @@
 # Documentation: https://developer.todoist.com/sync/v8/#get-all-completed-items
-from typing import Optional
+# from typing import Optional
+# This script uses the Todoist Sync API
 
 from dotenv import load_dotenv
 import os
-import todoist as td
-import pandas as pd
+# import pandas as pd
+
+import todoist
 import datetime as dt
 import logging
 
@@ -24,9 +26,9 @@ yesterday = today - dt.timedelta(days=1)
 yesterday_start = str(yesterday) + "T00:00:00Z"
 yesterday_end = str(yesterday) + "T23:59:59Z"
 
-api = td.TodoistAPI(TODOIST_API_TOKEN)
+api = todoist.TodoistAPI(TODOIST_API_TOKEN)
 # Sync to API to get latest data
-api.sync();
+api.sync()
 
 def has_values(dictionary):
     # For each key in dictionary, check if keys in dict have values
@@ -63,3 +65,22 @@ for line in completed_tasks_data:
     print(line)
 
 # TODO Unpack items in lists
+
+completed_tasks_data[0]['items'][0]
+completed_tasks_data[0]['items'][0]['project_id']
+
+for i in completed_tasks_data[0]['projects']:
+    print(completed_tasks_data[0]['projects'][i])
+    print(completed_tasks_data[0]['projects'][i]['name'])
+
+def add_project_name(item, data):
+    project_id = str(item['project_id'])
+    # print(project_id)
+    item['project_name'] = data[project_id]['name']
+    return item
+
+add_project_name(completed_tasks_data[0]['items'][0], completed_tasks_data[0]['projects'])
+
+completed_tasks_data[0]['projects']
+
+# Create list of dictionaries for uploading to bigquery
