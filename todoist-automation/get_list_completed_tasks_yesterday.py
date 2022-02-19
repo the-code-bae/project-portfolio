@@ -4,15 +4,12 @@
 
 from dotenv import load_dotenv
 import os
-# import pandas as pd
-
 import todoist
 import datetime as dt
 import logging
 
 load_dotenv()
 logger = logging.getLogger('__name__')
-# TODO Change colour of logging message from red to white
 logging.basicConfig(format='[%(asctime)s.%(msecs)03d] %(filename)s - [%(levelname)s] %(message)s'
                     , datefmt='%d-%b-%y %H:%M:%S'
                     , level=logging.INFO)
@@ -20,10 +17,12 @@ logging.basicConfig(format='[%(asctime)s.%(msecs)03d] %(filename)s - [%(levelnam
 TODOIST_API_TOKEN = os.getenv('TODOIST_API_TOKEN')
 
 # Create yesterday's date variables
-today = dt.date.today()
-yesterday = today - dt.timedelta(days=1)
-yesterday_start = str(yesterday) + "T00:00:00Z"
-yesterday_end = str(yesterday) + "T23:59:59Z"
+TODAY = dt.date.today()
+YESTERDAY = TODAY - dt.timedelta(days=1)
+YESTERDAY_START = str(YESTERDAY) + "T00:00:00Z"
+YESTERDAY_END = str(YESTERDAY) + "T23:59:59Z"
+
+# TODO create function to make sure date is in the correct format
 
 api = todoist.TodoistAPI(TODOIST_API_TOKEN)
 # Sync to API to get latest data
@@ -50,8 +49,8 @@ while is_empty == 0:
 
     data = api.completed.get_all(limit=limit
                                  , offset=offset
-                                 , since=yesterday_start
-                                 , until=yesterday_end)
+                                 , since=YESTERDAY_START
+                                 , until=YESTERDAY_END)
 
     logging.info(f'API call: #{api_call + 1}, list count: {len(data)}, item count: {len(data["items"])}')
     api_call += 1
@@ -65,24 +64,12 @@ while is_empty == 0:
 for line in completed_tasks_data:
     print(line)
 
-# TODO Unpack items in lists
-
-completed_tasks_data[0]['items'][0]
-completed_tasks_data[0]['items'][0]['project_id']
-
-for i in completed_tasks_data[0]['projects']:
-    print(completed_tasks_data[0]['projects'][i])
-    print(completed_tasks_data[0]['projects'][i]['name'])
-
 
 def add_project_name(item, data):
     project_id = str(item['project_id'])
     # print(project_id)
     item['project_name'] = data[project_id]['name']
     return item
-
-
-add_project_name(completed_tasks_data[0]['items'][0], completed_tasks_data[0]['projects'])
 
 
 def convert_to_list_of_dicts(response_data):
@@ -100,3 +87,5 @@ convert_to_list_of_dicts(completed_tasks_data)
 # Create list of dictionaries for uploading to bigquery
 
 # Convert to json
+
+# Upload to bigquery
