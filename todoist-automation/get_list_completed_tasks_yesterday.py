@@ -88,12 +88,74 @@ class TodoistConnector:
                 output.append(row)
         return output
 
+    # TODO Convert to json - to be used to upload to Google Cloud Storage
+    def convert_to_json(self, list_of_dicts):
+        return json.dumps(list_of_dicts)
 
-# Convert to json
 
 # Upload to bigquery
+class BigQueryConnector:
+    def client(self):
+        return bigquery.Client()
+
+    def create_bq_dataset(self, dataset_name):
+        client = self.client()
+
+        # Set dataset_id to the ID of the dataset to create.
+        dataset_id = f'{client.project}.{dataset_name}'
+
+        # Construct a full Dataset object to send to the API.
+        dataset = bigquery.Dataset(dataset_id)
+
+        # Specify the geographic location where the dataset should reside.
+        dataset.location = "EU"
+
+        # Send the dataset to the API for creation, with an explicit timeout.
+        dataset = client.create_dataset(dataset, timeout=30)  # Make an API request.
+        logger.info(f"Created dataset {client.project}.{dataset.dataset_id}")
+
+    def load_single_json_to_bq_table(self, dataset_name, table_name, dict_):
+        client = self.client()
+
+        # Set table_id to the ID of the table to create.
+        table_id = f"{client.project}.{dataset_name}.{table_name}"
+
+        job_config = bigquery.LoadJobConfig(
+            source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON, autodetect=True, )
+
+        load_job = client.load_table_from_json(dict_, table_id, job_config=job_config)
+
+        load_job.result()
+
+        destination_table = client.get_table(table_id)
+        logger.info(f"Loaded {destination_table.num_rows} rows and {len(destination_table.schema)} columns to {table_id}")
+
+    # def load_single_csv_to_bq_table(self, dataset_name, table_name):
+    #     client = self.client()
+    #
+    #     # Set table_id to the ID of the table to create.
+    #     table_id = f"{client.project}.{dataset_name}.{table_name}"
+    #
+    #     job_config = bigquery.LoadJobConfig(
+    #         source_format=bigquery.SourceFormat.CSV, skip_leading_rows=1, autodetect=True, )
+    #
+    #     with open(PATH_TO_DIR.joinpath(f'csv/{table_name}.csv'), "rb") as source_file:
+    #         job = client.load_table_from_file(source_file, table_id, job_config=job_config)
+    #
+    #     job.result()
+    #
+    #     table = client.get_table(table_id)  # Make an API request.
+    #     logger.info(f"Loaded {table.num_rows} rows and {len(table.schema)} columns to {table_id}")
+    #
+    # def load_multiple_csv_to_bq_table(self, dataset_name, table_names_list):
+    #     for table in table_names_list:
+    #         self.load_single_csv_to_bq_table(dataset_name=dataset_name, table_name=table)
+
 
 if __name__ == '__main__':
     t = TodoistConnector()
     data = t.get_completed_tasks()
-    t.convert_to_list_of_dicts(data)
+    data_dict = t.convert_to_list_of_dicts(data)
+
+    bqc = BigQueryConnector()
+    bqc.load_single_json_to_bq_table('todoist', 'completed_tasks', data_dict)
