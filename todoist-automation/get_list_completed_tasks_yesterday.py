@@ -17,8 +17,8 @@ TODOIST_API_TOKEN = os.getenv('TODOIST_API_TOKEN')
 # Create yesterday's date variables
 TODAY = dt.date.today()
 YESTERDAY = TODAY - dt.timedelta(days=1)
-YESTERDAY_START = str(YESTERDAY) + "T00:00:00Z"
-YESTERDAY_END = str(YESTERDAY) + "T23:59:59Z"
+YESTERDAY_START = str(YESTERDAY) + "T00:00"
+YESTERDAY_END = str(YESTERDAY) + "T23:59"
 
 # TODO create function to make sure date is in the correct format
 
