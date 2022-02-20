@@ -76,12 +76,10 @@ class TodoistConnector:
     def convert_to_list_of_dicts(self, response_data):
         output = []
         for response in response_data:
-            print(response)
-            for j in response['items']:
-                print(j)
-                row = self.add_project_name(j, response['projects'])
+            for item in response['items']:
+                row = self.add_project_name(item, response['projects'])
                 output.append(row)
-                print(row)
+                print(row)  # TODO delete?
         return output
 
 
