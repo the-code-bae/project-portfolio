@@ -5,6 +5,8 @@ import os
 import todoist
 import datetime as dt
 import logging
+import json
+from google.cloud import bigquery
 
 load_dotenv()
 logger = logging.getLogger('__name__')
