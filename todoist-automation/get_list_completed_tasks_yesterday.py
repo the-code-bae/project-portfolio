@@ -47,7 +47,7 @@ class TodoistConnector:
         end = end or YESTERDAY_END
         offset = 0
         is_empty = 0
-        api_call = 0
+        api_calls = 0
 
         while is_empty == 0:
 
@@ -56,14 +56,16 @@ class TodoistConnector:
                                          , since=start
                                          , until=end)
 
-            logging.info(f'API call: #{api_call + 1}, list count: {len(data)}, item count: {len(data["items"])}')
-            api_call += 1
-
             if self.has_values(data):
                 completed_tasks_data.append(data)  # add items to list
                 offset += limit  # increase offset to get the next set of results
+                logging.info(f'API call: #{api_calls + 1}, list count: {len(data)}, item count: {len(data["items"])}')
+                api_calls += 1
+
             else:
                 is_empty += 1
+                logging.info(f'Total API calls made: {api_calls}')
+
         return completed_tasks_data
 
     def add_project_name(self, item, data):
