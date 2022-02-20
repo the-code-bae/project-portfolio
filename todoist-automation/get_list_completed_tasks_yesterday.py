@@ -20,6 +20,7 @@ YESTERDAY = TODAY - dt.timedelta(days=1)
 YESTERDAY_START = str(YESTERDAY) + "T00:00"
 YESTERDAY_END = str(YESTERDAY) + "T23:59"
 
+
 # TODO create function to make sure date is in the correct format
 
 class TodoistConnector:
@@ -83,12 +84,8 @@ class TodoistConnector:
             for item in response['items']:
                 row = self.add_project_name(item, response['projects'])
                 output.append(row)
-                print(row)  # TODO delete?
         return output
 
-
-# convert_to_list_of_dicts(completed_tasks_data)
-# Create list of dictionaries for uploading to bigquery
 
 # Convert to json
 
