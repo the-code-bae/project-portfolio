@@ -16,14 +16,10 @@ logging.basicConfig(format='[%(asctime)s.%(msecs)03d] %(filename)s - [%(levelnam
 
 TODOIST_API_TOKEN = os.getenv('TODOIST_API_TOKEN')
 
-# Create yesterday's date variables
+# Create yesterday's date for default
 TODAY = dt.date.today()
 YESTERDAY = TODAY - dt.timedelta(days=1)
-YESTERDAY_START = str(YESTERDAY) + "T00:00"
-YESTERDAY_END = str(YESTERDAY) + "T23:59"
 
-
-# TODO create function to make sure date is in the correct format
 
 class TodoistConnector:
     def api_client(self, api_token=None):
@@ -47,23 +43,24 @@ class TodoistConnector:
 
         completed_tasks_data = []
         limit = limit or 5
-        start = start or YESTERDAY_START
-        end = end or YESTERDAY_END
+        start = (str(start) + "T00:00") or (str(YESTERDAY) + "T00:00")
+        end = (str(end) + "T23:59") or (str(YESTERDAY) + "T23:59")
         offset = 0
         is_empty = 0
         api_calls = 0
 
         while is_empty == 0:
 
-            data = api.completed.get_all(limit=limit
-                                         , offset=offset
-                                         , since=start
-                                         , until=end)
+            response_data = api.completed.get_all(limit=limit
+                                                  , offset=offset
+                                                  , since=start
+                                                  , until=end)
 
-            if self.has_values(data):
-                completed_tasks_data.append(data)  # add items to list
+            if self.has_values(response_data):
+                completed_tasks_data.append(response_data)  # add items to list
                 offset += limit  # increase offset to get the next set of results
-                logging.info(f'API call: #{api_calls + 1}, list count: {len(data)}, item count: {len(data["items"])}')
+                logging.info(
+                    f'API call: #{api_calls + 1}, list count: {len(response_data)}, item count: {len(response_data["items"])}')
                 api_calls += 1
 
             else:
@@ -128,7 +125,8 @@ class BigQueryConnector:
         load_job.result()
 
         destination_table = client.get_table(table_id)
-        logger.info(f"Loaded {destination_table.num_rows} rows and {len(destination_table.schema)} columns to {table_id}")
+        logger.info(
+            f"Loaded {destination_table.num_rows} rows and {len(destination_table.schema)} columns to {table_id}")
 
     # def load_single_csv_to_bq_table(self, dataset_name, table_name):
     #     client = self.client()
@@ -154,7 +152,7 @@ class BigQueryConnector:
 
 if __name__ == '__main__':
     t = TodoistConnector()
-    data = t.get_completed_tasks()
+    data = t.get_completed_tasks(start="2022-02-10", end="2022-02-13")
     data_dict = t.convert_to_list_of_dicts(data)
 
     bqc = BigQueryConnector()
