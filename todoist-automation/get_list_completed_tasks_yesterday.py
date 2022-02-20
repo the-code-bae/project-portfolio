@@ -1,6 +1,4 @@
-# Documentation: https://developer.todoist.com/sync/v8/#get-all-completed-items
-# from typing import Optional
-# This script uses the Todoist Sync API
+# Documentation - This script uses the Todoist Sync API: https://developer.todoist.com/sync/v8/#get-all-completed-items
 
 from dotenv import load_dotenv
 import os
@@ -35,12 +33,15 @@ class TodoistConnector:
 
         # Create a unique list of values
         output = list(set(bool_values))
-
         return output[0]
 
     def get_completed_tasks(self, limit=None, start=None, end=None):
+        # Create API client
         api = self.api_client()
-        api.sync  # Sync to API to get latest data
+
+        # Sync to API to get latest data
+        api.sync
+
         completed_tasks_data = []
         limit = limit or 5
         start = start or YESTERDAY_START
@@ -69,7 +70,10 @@ class TodoistConnector:
         return completed_tasks_data
 
     def add_project_name(self, item, data):
+        # Convert the project id from the item dictionary into a string
         project_id = str(item['project_id'])
+
+        # Create new key value pair including project name
         item['project_name'] = data[project_id]['name']
         return item
 
