@@ -93,4 +93,4 @@ class TodoistConnector:
 if __name__ == '__main__':
     t = TodoistConnector()
     data = t.get_completed_tasks()
-    # t.convert_to_list_of_dicts(data)
+    t.convert_to_list_of_dicts(data)
