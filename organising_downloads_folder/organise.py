@@ -5,7 +5,7 @@ DOWNLOADS_FOLDER = (pathlib.Path.home().joinpath('Downloads'))
 
 # define the file categories with dictionary
 SUBDIR = {
-    "DOCUMENTS": [".pdf", ".docx", ".txt", ".ppt"],
+    "DOCUMENTS": [".pdf", ".docx", ".doc", ".txt", ".ppt"],
     "AUDIO": [".m4a", ".m4b", ".mp3"],
     "IMAGES": [".jpg", ".jpeg", ".png"],
     "DATA": [".csv", ".xls"],
