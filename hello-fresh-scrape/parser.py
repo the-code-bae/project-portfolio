@@ -11,16 +11,14 @@ HF_PATH = PATH.joinpath(DIRECTORY_NAME)
 #     if f.is_file() and f.suffix == ".html":
 #         logger.info(f"file is: {f}, suffix is: {f.suffix}")
 
+# Create list of filepaths for all hello fresh html files which have the recipes
 html_files = [f for f in HF_PATH.iterdir() if f.is_file() and f.suffix == ".html"]
 html_files.sort()
 
 data_dict = {}
 for f in html_files[:1]:
-    # print(f)
-    # print(f.name)
     with open(f) as f_obj:
         contents = f_obj.read()
-        # print('done')
         soup = BeautifulSoup(contents, "html.parser")
 
         # Recipe title
@@ -49,14 +47,13 @@ for f in html_files[:1]:
             row_headings_flattened.extend(c.contents)
         print(row_headings_flattened)
 
-
-        # per portion
-        print("per portion")
-        nutritional_values_per_portion = soup.find_all(attrs={"data-test-id": "nutritional-values-amount"})
-        per_portion_flattened = []
-        for c in nutritional_values_per_portion:
-            per_portion_flattened.extend(c.contents)
-        print(dict(zip(row_headings_flattened,per_portion_flattened)))
+        # per serving
+        print("per serving")
+        nutritional_values_per_serving = soup.find_all(attrs={"data-test-id": "nutritional-values-amount"})
+        per_serving_flattened = []
+        for c in nutritional_values_per_serving:
+            per_serving_flattened.extend(c.contents)
+        print(dict(zip(row_headings_flattened, per_serving_flattened)))
 
         # per 100g
         print("per 100g")
@@ -65,4 +62,8 @@ for f in html_files[:1]:
         for c in nutritional_values_per_100g:
             per_100g_flattened.extend(c.contents)
         print(dict(zip(row_headings_flattened,per_100g_flattened)))
+
+        # prep time
+
+        # difficulty
 
