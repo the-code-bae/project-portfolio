@@ -17,10 +17,14 @@ html_files.sort()
 data_dict = {}
 for f in html_files[:3]:
     # print(f)
-    print(f.name)
+    # print(f.name)
     with open(f) as f_obj:
         contents = f_obj.read()
         # print('done')
         soup = BeautifulSoup(contents, "html.parser")
-        print(soup.find_all(attrs={"data-test-id": "recipe-preview-title"})[0].contents)
-        print(soup.find_all(attrs={"data-test-id": "recipe-preview-headline"})[0].contents)
+
+        # Recipe title
+        title = soup.find_all(attrs={"data-test-id": "recipe-preview-title"})[0].contents
+        headline = soup.find_all(attrs={"data-test-id": "recipe-preview-headline"})[0].contents
+        recipe_title = " ".join(title + headline)
+        logger.info(f"The recipe is: {recipe_title}, file name: {f.name}")
