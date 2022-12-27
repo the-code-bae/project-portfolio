@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import pathlib
 from loguru import logger
+import pandas as pd
 
 DIRECTORY_NAME = "Hello Fresh Web Files"
 FILE = "Bacon Linguine Amatriciana.html"
@@ -12,33 +13,38 @@ html_files = [f for f in HF_PATH.iterdir() if f.is_file() and f.suffix == ".html
 html_files.sort()
 
 ingredients_data = []
-for f in html_files[:2]:
+errors = []
+for f in html_files:
     with open(f) as f_obj:
         contents = f_obj.read()
         soup = BeautifulSoup(contents, "html.parser")
 
         recipe_dict = {}
-
+        logger.info(f"File name: {f.name}")
         # Recipe title
-        title = soup.find_all(attrs={"data-test-id": "recipe-preview-title"})[0].contents
-        headline = soup.find_all(attrs={"data-test-id": "recipe-preview-headline"})[0].contents
-        recipe_title = " ".join(title + headline)
-        logger.info(f"The recipe is: {recipe_title}, file name: {f.name}")
-        recipe_dict["title"] = recipe_title
+        try:
+            title = soup.find_all(attrs={"data-test-id": "recipe-preview-title"})[0].contents
+            headline = soup.find_all(attrs={"data-test-id": "recipe-preview-headline"})[0].contents
+            recipe_title = " ".join(title + headline)
+            # logger.info(f"The recipe is: {recipe_title}, file name: {f.name}")
+            recipe_dict["title"] = recipe_title
 
-        # Get the ingredients
-        for c in soup.find_all("span", class_="web-12wkbvj"):
-            if c.contents[0].name == "p":
-                for i in c.contents[:2]:
-                    if isinstance(i, str):
-                        food = i
-                        recipe_dict["ingredient"] = food
-                    if i.next.name not in ["span", "div"]:
-                        units = i.next
-                        recipe_dict["unit"] = units
+            # Get the ingredients
+            for c in soup.find_all("span", class_="web-12wkbvj"):
+                if c.contents[0].name == "p":
+                    for i in c.contents[:2]:
+                        if isinstance(i, str):
+                            food = i
+                            recipe_dict["ingredient"] = food
+                        if i.next.name not in ["span", "div"]:
+                            units = i.next
+                            recipe_dict["unit"] = units
 
-                # Add tuple to list
-                ingredients_data.append((recipe_title, food, units))
+                    # Add tuple to list
+                    ingredients_data.append((recipe_title, food, units))
+        except:
+            print(f"Error processing this file: {f.name}")
+            errors.append(f.name)
 print(ingredients_data)
 # for d in ingredients_data:
 #     print(d)
@@ -74,3 +80,6 @@ print(ingredients_data)
 
         # difficulty
 
+df = pd.DataFrame(ingredients_data, columns=['recipe_title', 'ingredient', 'unit'])
+
+df.to_csv("ingredients.csv",index=False)
