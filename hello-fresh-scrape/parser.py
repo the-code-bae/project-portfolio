@@ -81,5 +81,6 @@ print(ingredients_data)
         # difficulty
 
 df = pd.DataFrame(ingredients_data, columns=['recipe_title', 'ingredient', 'unit'])
-
-df.to_csv("ingredients.csv",index=False)
+for e in errors:
+    print(e)
+# df.to_csv("ingredients.csv",index=False)
