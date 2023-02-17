@@ -4,7 +4,7 @@ bottleneck==1.2.1
 certifi==2022.12.7
 chardet==3.0.4
 colorama==0.4.4
-cryptography==3.3.2
+cryptography==39.0.1
 decorator==4.4.0
 geographiclib==1.50
 geopy==2.1.0
