@@ -2,11 +2,13 @@ from bs4 import BeautifulSoup
 import pathlib
 from loguru import logger
 import pandas as pd
+import datetime
 
 DIRECTORY_NAME = "Hello Fresh Web Files"
-FILE = "Bacon Linguine Amatriciana.html"
+# FILE = "Bacon Linguine Amatriciana.html"
 PATH = pathlib.Path(__file__).parent
 HF_PATH = PATH.joinpath(DIRECTORY_NAME)
+CURRENT_TIMESTAMP = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
 # Create list of filepaths for all hello fresh html files which have the recipes
 html_files = [f for f in HF_PATH.iterdir() if f.is_file() and f.suffix == ".html"]
@@ -83,4 +85,4 @@ print(ingredients_data)
 df = pd.DataFrame(ingredients_data, columns=['recipe_title', 'ingredient', 'unit'])
 for e in errors:
     print(e)
-# df.to_csv("ingredients.csv",index=False)
+df.to_csv("ingredients_"+CURRENT_TIMESTAMP+".csv",index=False)
