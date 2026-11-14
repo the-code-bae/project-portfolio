@@ -23,7 +23,7 @@ pygments==2.21.0
 pytz==2019.1
 requests==2.34.2
 six==1.15.0
-tornado==6.6
+tornado==6.6.1
 traitlets==5.16.1
 urllib3==2.8.0
 wcwidth==0.9.4
